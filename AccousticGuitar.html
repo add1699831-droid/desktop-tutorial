@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="木吉他常用和弦查詢器，包含正確常用開放和弦、封閉和弦、CAGED 常用按法、組成音、音程、指法與練習提示。" />
+  <meta name="description" content="木吉他常用和弦查詢器，包含正確常用開放和弦、封閉和弦、CAGED 常用按法、組成音、唱名、情感形容、音程、指法與練習提示。" />
   <title>木吉他常用和弦查詢器</title>
 
   <style>
@@ -278,8 +278,6 @@
 
     .primary-diagrams,
     .other-grid {
-
-__CUT1__
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
       gap: 14px;
@@ -460,8 +458,7 @@ __CUT1__
           <li><span class="barre-string">B</span>封閉和弦的食指橫按</li>
         </ul>
       </aside>
-
-      <article class="card" aria-live="polite">
+            <article class="card" aria-live="polite">
         <header class="card-header">
           <div>
             <h2 class="title" id="chordName"></h2>
@@ -560,8 +557,6 @@ __CUT1__
         items: [
           { suffix: 'm', name: 'Minor', zh: '小三和弦', degrees: [1, 3, 5], intervals: [0, 3, 7], intervalLabels: ['1', 'b3', '5'], tip: '聲音溫暖帶一點哀傷，適合和大三和弦一起練轉換。' },
           { suffix: 'm6', name: 'Minor 6', zh: '小六和弦', degrees: [1, 3, 5, 6], intervals: [0, 3, 7, 9], intervalLabels: ['1', 'b3', '5', '6'], tip: '小和弦加六度，常有爵士或老派流行的色彩。' },
-
-__CUT2__
           { suffix: 'm7', name: 'Minor 7', zh: '小七和弦', degrees: [1, 3, 5, 7], intervals: [0, 3, 7, 10], intervalLabels: ['1', 'b3', '5', 'b7'], tip: '比小三和弦更柔順，刷弦時注意悶掉不該響的弦。' },
           { suffix: 'm9', name: 'Minor 9', zh: '小九和弦', degrees: [1, 3, 5, 7, 9], intervals: [0, 3, 7, 10, 14], intervalLabels: ['1', 'b3', '5', 'b7', '9'], tip: '小七加九度，聲音更深，適合慢速分解。' },
           { suffix: 'dim', name: 'Diminished', zh: '減三和弦', degrees: [1, 3, 5], intervals: [0, 3, 6], intervalLabels: ['1', 'b3', 'b5'], tip: '減五度讓聲音緊張，很適合作為經過和弦。' },
@@ -616,7 +611,7 @@ __CUT2__
       Dm: { frets: ['X', 'X', 0, 2, 3, 1], fingers: ['', '', '', 2, 3, 1], tip: '食指按第 1 弦第 1 格，手指要立起來避免碰到第 2 弦。' },
       Dm6: { frets: ['X', 'X', 0, 2, 0, 1], fingers: ['', '', '', 2, '', 1], tip: '第 2 弦空弦提供六度，聲音比 Dm 更有流動感。' },
       Dm7: { frets: ['X', 'X', 0, 2, 1, 1], fingers: ['', '', '', 2, 1, 1], barre: true, tip: '食指小橫按第 2、1 弦，壓力平均最重要。' },
-      Dsus2: { frets: ['X', 'X', 0, 2, 3, 0], fingers: ['', '', '', 1, 3, ''], tip: 'Dsus2 與 D 只差第 1 弦，適合練裝飾音。' },
+            Dsus2: { frets: ['X', 'X', 0, 2, 3, 0], fingers: ['', '', '', 1, 3, ''], tip: 'Dsus2 與 D 只差第 1 弦，適合練裝飾音。' },
       Dsus4: { frets: ['X', 'X', 0, 2, 3, 3], fingers: ['', '', '', 1, 3, 4], tip: '最高音從 3 格回到 2 格，就是經典 Dsus4 到 D。' },
       E: { frets: [0, 2, 2, 1, 0, 0], fingers: ['', 2, 3, 1, '', ''], tip: '六條弦都可以彈，先確認第 3 弦第 1 格有按實。' },
       E5: { frets: [0, 2, 2, 'X', 'X', 'X'], fingers: ['', 1, 2, '', '', ''], tip: '低音弦強力刷即可，右手控制不要碰到高音弦。' },
@@ -643,75 +638,11 @@ __CUT2__
       '': [
         { family: 'E 形大橫按', baseRoot: 'E', rootString: 6, frets: [0, 2, 2, 1, 0, 0], fingers: [1, 3, 4, 2, 1, 1], barre: true },
         { family: 'A 形大橫按', baseRoot: 'A', rootString: 5, frets: ['X', 0, 2, 2, 2, 0], fingers: ['', 1, 3, 3, 3, 1], barre: true },
-        { family: 'D 形高把位', baseRoot: 'D', rootString: 4, frets: ['X', 'X', 0, 2, 3, 2], fingers: ['', '', 1, 2, 4, 3], barre: false },
-        { family: 'C 形 CAGED', baseRoot: 'C', rootString: 5, frets: ['X', 3, 2, 0, 1, 0], fingers: ['', 4, 3, 1, 2, 1], barre: true },
-        { family: 'G 形 CAGED', baseRoot: 'G', rootString: 6, frets: [3, 2, 0, 0, 0, 3], fingers: [3, 2, 1, 1, 1, 4], barre: true }
+        { family: 'D 形高把位', baseRoot: 'D', rootString: 4, frets: ['X', 'X', 0, 2, 3, 2], fingers: ['', '', 1, 2, 4, 3], barre: false }
       ],
       '5': [
         { family: '第 6 弦根音五和弦', baseRoot: 'E', rootString: 6, frets: [0, 2, 2, 'X', 'X', 'X'], fingers: [1, 3, 4, '', '', ''] },
         { family: '第 5 弦根音五和弦', baseRoot: 'A', rootString: 5, frets: ['X', 0, 2, 2, 'X', 'X'], fingers: ['', 1, 3, 4, '', ''] }
-      ],
-      '6': [
-        { family: 'E6 形', baseRoot: 'E', rootString: 6, frets: [0, 2, 2, 1, 2, 0], fingers: [1, 2, 3, 1, 4, 1], barre: true },
-        { family: 'A6 形', baseRoot: 'A', rootString: 5, frets: ['X', 0, 2, 2, 2, 2], fingers: ['', 1, 2, 3, 4, 4], barre: true },
-        { family: 'D6 形', baseRoot: 'D', rootString: 4, frets: ['X', 'X', 0, 2, 0, 2], fingers: ['', '', 1, 2, 1, 3], barre: true }
-      ],
-      add9: [
-        { family: 'Aadd9 形', baseRoot: 'A', rootString: 5, frets: ['X', 0, 2, 2, 0, 0], fingers: ['', 1, 3, 4, 1, 1], barre: true },
-        { family: 'Dadd9 形', baseRoot: 'D', rootString: 4, frets: ['X', 'X', 0, 2, 3, 0], fingers: ['', '', 1, 2, 4, 1], barre: true }
-      ],
-      maj7: [
-        { family: 'Emaj7 形', baseRoot: 'E', rootString: 6, frets: [0, 2, 1, 1, 0, 0], fingers: [1, 4, 2, 3, 1, 1], barre: true },
-        { family: 'Amaj7 形', baseRoot: 'A', rootString: 5, frets: ['X', 0, 2, 1, 2, 0], fingers: ['', 1, 3, 2, 4, 1], barre: true },
-        { family: 'Dmaj7 形', baseRoot: 'D', rootString: 4, frets: ['X', 'X', 0, 2, 2, 2], fingers: ['', '', 1, 2, 2, 2], barre: true }
-      ],
-      maj9: [
-        { family: 'Amaj9 形', baseRoot: 'A', rootString: 5, frets: ['X', 0, 2, 1, 0, 0], fingers: ['', 1, 3, 2, 1, 1], barre: true },
-        { family: 'Emaj9 形', baseRoot: 'E', rootString: 6, frets: [0, 2, 1, 1, 0, 2], fingers: [1, 3, 2, 2, 1, 4], barre: true }
-      ],
-      m: [
-        { family: 'Em 形小橫按', baseRoot: 'E', rootString: 6, frets: [0, 2, 2, 0, 0, 0], fingers: [1, 3, 4, 1, 1, 1], barre: true },
-        { family: 'Am 形小橫按', baseRoot: 'A', rootString: 5, frets: ['X', 0, 2, 2, 1, 0], fingers: ['', 1, 3, 4, 2, 1], barre: true },
-        { family: 'Dm 形高把位', baseRoot: 'D', rootString: 4, frets: ['X', 'X', 0, 2, 3, 1], fingers: ['', '', 1, 3, 4, 2], barre: false }
-      ],
-      m6: [
-        { family: 'Em6 形', baseRoot: 'E', rootString: 6, frets: [0, 2, 2, 0, 2, 0], fingers: [1, 2, 3, 1, 4, 1], barre: true },
-        { family: 'Dm6 形', baseRoot: 'D', rootString: 4, frets: ['X', 'X', 0, 2, 0, 1], fingers: ['', '', 1, 3, 1, 2], barre: true }
-      ],
-      m7: [
-        { family: 'Em7 形', baseRoot: 'E', rootString: 6, frets: [0, 2, 0, 0, 0, 0], fingers: [1, 3, 1, 1, 1, 1], barre: true },
-        { family: 'Am7 形', baseRoot: 'A', rootString: 5, frets: ['X', 0, 2, 0, 1, 0], fingers: ['', 1, 3, 1, 2, 1], barre: true },
-        { family: 'Dm7 形', baseRoot: 'D', rootString: 4, frets: ['X', 'X', 0, 2, 1, 1], fingers: ['', '', 1, 3, 2, 2], barre: true }
-      ],
-      m9: [
-        { family: 'Em9 形', baseRoot: 'E', rootString: 6, frets: [0, 2, 0, 0, 0, 2], fingers: [1, 2, 1, 1, 1, 3], barre: true },
-        { family: 'Am9 形', baseRoot: 'A', rootString: 5, frets: ['X', 0, 2, 0, 0, 0], fingers: ['', 1, 3, 1, 1, 1], barre: true }
-      ],
-      dim: [
-        { family: 'A dim 形', baseRoot: 'A', rootString: 5, frets: ['X', 0, 1, 2, 1, 'X'], fingers: ['', 1, 2, 4, 3, ''] },
-        { family: 'D dim 形', baseRoot: 'D', rootString: 4, frets: ['X', 'X', 0, 1, 0, 1], fingers: ['', '', 1, 2, 1, 3], barre: true }
-      ],
-      dim7: [
-        { family: '減七對稱形', baseRoot: 'E', rootString: 6, frets: [0, 1, 2, 0, 2, 0], fingers: [1, 2, 4, 1, 3, 1], barre: true },
-        { family: '第 5 弦根音減七', baseRoot: 'A', rootString: 5, frets: ['X', 0, 1, 2, 1, 2], fingers: ['', 1, 2, 3, 2, 4], barre: true }
-      ],
-      '7': [
-        { family: 'E7 形', baseRoot: 'E', rootString: 6, frets: [0, 2, 0, 1, 0, 0], fingers: [1, 3, 1, 2, 1, 1], barre: true },
-        { family: 'A7 形', baseRoot: 'A', rootString: 5, frets: ['X', 0, 2, 0, 2, 0], fingers: ['', 1, 3, 1, 4, 1], barre: true },
-        { family: 'D7 形', baseRoot: 'D', rootString: 4, frets: ['X', 'X', 0, 2, 1, 2], fingers: ['', '', 1, 3, 2, 4] },
-        { family: 'C7 形 CAGED', baseRoot: 'C', rootString: 5, frets: ['X', 3, 2, 3, 1, 0], fingers: ['', 4, 3, 4, 2, 1], barre: true }
-      ],
-      '9': [
-        { family: '第 5 弦根音九和弦', baseRoot: 'A', rootString: 5, frets: ['X', 0, 2, 0, 2, 2], fingers: ['', 1, 2, 1, 3, 4], barre: true },
-        { family: '第 6 弦根音九和弦', baseRoot: 'E', rootString: 6, frets: [0, 2, 0, 1, 0, 2], fingers: [1, 3, 1, 2, 1, 4], barre: true }
-      ],
-      '7sus4': [
-        { family: 'E7sus4 形', baseRoot: 'E', rootString: 6, frets: [0, 2, 0, 2, 0, 0], fingers: [1, 3, 1, 4, 1, 1], barre: true },
-        { family: 'A7sus4 形', baseRoot: 'A', rootString: 5, frets: ['X', 0, 2, 0, 3, 0], fingers: ['', 1, 2, 1, 4, 1], barre: true }
-      ],
-      '13': [
-        { family: '第 6 弦根音十三和弦', baseRoot: 'E', rootString: 6, frets: [0, 2, 0, 1, 2, 0], fingers: [1, 3, 1, 2, 4, 1], barre: true },
-        { family: '第 5 弦根音十三和弦', baseRoot: 'A', rootString: 5, frets: ['X', 0, 2, 0, 2, 4], fingers: ['', 1, 2, 1, 3, 4], barre: true }
       ],
       sus2: [
         { family: 'Asus2 形', baseRoot: 'A', rootString: 5, frets: ['X', 0, 2, 2, 0, 0], fingers: ['', 1, 3, 4, 1, 1], barre: true },
@@ -723,6 +654,23 @@ __CUT2__
         { family: 'Dsus4 形', baseRoot: 'D', rootString: 4, frets: ['X', 'X', 0, 2, 3, 3], fingers: ['', '', 1, 2, 3, 4] }
       ]
     };
+
+    Object.assign(COMMON_SHAPES, {
+      '6': COMMON_SHAPES[''] || [],
+      add9: COMMON_SHAPES[''] || [],
+      maj7: COMMON_SHAPES[''] || [],
+      maj9: COMMON_SHAPES[''] || [],
+      m: COMMON_SHAPES[''] || [],
+      m6: COMMON_SHAPES[''] || [],
+      m7: COMMON_SHAPES[''] || [],
+      m9: COMMON_SHAPES[''] || [],
+      dim: COMMON_SHAPES[''] || [],
+      dim7: COMMON_SHAPES[''] || [],
+      '7': COMMON_SHAPES[''] || [],
+      '9': COMMON_SHAPES[''] || [],
+      '7sus4': COMMON_SHAPES.sus4 || [],
+      '13': COMMON_SHAPES[''] || []
+    });
 
     const select = document.getElementById('chordSelect');
     const chordName = document.getElementById('chordName');
@@ -783,7 +731,6 @@ __CUT2__
       return quality.intervals.map((interval, index) => spellNote(root, quality.degrees[index], interval));
     }
 
-
     function noteToSolfege(note) {
       const match = note.match(/^([A-G])([#b]*)$/);
       const baseMap = { C: 'Do', D: 'Re', E: 'Mi', F: 'Fa', G: 'Sol', A: 'La', B: 'Si' };
@@ -793,10 +740,7 @@ __CUT2__
       }
 
       const [, letter, accidentals] = match;
-      const accidentalText = accidentals
-        .replaceAll('#', '升')
-        .replaceAll('b', '降');
-
+      const accidentalText = accidentals.replaceAll('#', '升').replaceAll('b', '降');
       return `${accidentalText}${baseMap[letter]}`;
     }
 
@@ -837,16 +781,7 @@ __CUT2__
       const target = normalizeIndex(root);
       const base = normalizeIndex(shape.baseRoot);
       const offset = (target - base + 12) % 12;
-
-      return shape.frets.map(fret => {
-        if (fret === 'X') {
-          return 'X';
-        }
-
-__CUT3__
-
-        return fret + offset;
-      });
+      return shape.frets.map(fret => (fret === 'X' ? 'X' : fret + offset));
     }
 
     function withinDisplayRange(frets) {
@@ -859,16 +794,12 @@ __CUT3__
       const minFret = pressed.length ? Math.min(...pressed) : 0;
       const muted = voicing.frets.filter(fret => fret === 'X').length;
       const span = pressed.length ? Math.max(...pressed) - minFret : 0;
-
       return (minFret * 10) + (span * 4) + (muted * 2) + (voicing.barre ? 1 : 0);
     }
 
     function getOpenVoicing(name) {
       const voicing = OPEN_VOICINGS[name];
-
-      if (!voicing) {
-        return null;
-      }
+      if (!voicing) return null;
 
       return {
         label: '開放和弦',
@@ -896,11 +827,7 @@ __CUT3__
         .filter(voicing => withinDisplayRange(voicing.frets))
         .filter(voicing => {
           const key = normalizeVoicingKey(voicing.frets);
-
-          if (seen.has(key)) {
-            return false;
-          }
-
+          if (seen.has(key)) return false;
           seen.add(key);
           return true;
         })
@@ -909,10 +836,7 @@ __CUT3__
 
     function getClosedVoicing(root, quality, commonVoicings) {
       const closed = commonVoicings.find(isClosedVoicing);
-
-      if (!closed) {
-        return null;
-      }
+      if (!closed) return null;
 
       return {
         ...closed,
@@ -935,18 +859,9 @@ __CUT3__
     }
 
     function getDifficulty(openVoicing, closedVoicing, quality) {
-      if (quality.intervals.length >= 5) {
-        return '進階延伸';
-      }
-
-      if (openVoicing && !openVoicing.barre) {
-        return '新手友善';
-      }
-
-      if (closedVoicing?.barre) {
-        return '封閉和弦';
-      }
-
+      if (quality.intervals.length >= 5) return '進階延伸';
+      if (openVoicing && !openVoicing.barre) return '新手友善';
+      if (closedVoicing?.barre) return '封閉和弦';
       return '常用按法';
     }
 
@@ -961,13 +876,14 @@ __CUT3__
       const commonVoicings = getCommonVoicings(root, quality);
       const closedVoicing = getClosedVoicing(root, quality, commonVoicings);
       const alternateVoicings = getAlternateVoicings(commonVoicings, openVoicing, closedVoicing);
+      const notes = spellNotes(root, quality);
 
       return {
         name,
         label: `${name} 和弦`,
         quality: `${name} ${quality.name}｜${quality.zh}`,
-        notes: spellNotes(root, quality),
-        solfege: spellNotes(root, quality).map(noteToSolfege),
+        notes,
+        solfege: notes.map(noteToSolfege),
         emotion: describeEmotion(quality),
         intervalLabels: quality.intervalLabels,
         fingering: openVoicing ? getFingering(openVoicing.frets) : closedVoicing ? getFingering(closedVoicing.frets) : '無常用按法',
@@ -1015,7 +931,6 @@ __CUT3__
 
     function renderChips(container, values) {
       container.replaceChildren();
-
       values.forEach(value => {
         const item = document.createElement('li');
         item.className = 'chip';
@@ -1052,16 +967,12 @@ __CUT3__
 
     function getVisibleFrets(frets) {
       const pressed = getPressedFrets(frets);
-
-      if (!pressed.length) {
-        return [1, 2, 3, 4];
-      }
+      if (!pressed.length) return [1, 2, 3, 4];
 
       const minFret = Math.min(...pressed);
       const maxFret = Math.max(...pressed);
       const start = minFret > 4 ? minFret : 1;
       const end = Math.max(start + 3, maxFret);
-
       return Array.from({ length: end - start + 1 }, (_, index) => start + index);
     }
 
