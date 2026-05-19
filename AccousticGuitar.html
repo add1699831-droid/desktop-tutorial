@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="給木吉他初學者使用的全和弦查詢器，包含開放和弦、封閉和弦、組成音、按法、指法與練習提示。" />
+  <meta name="description" content="木吉他全和弦查詢器，包含組成音、開放和弦、封閉和弦、其他常用按法、指法與練習提示。" />
   <title>木吉他全和弦查詢器</title>
 
   <style>
@@ -39,7 +39,7 @@
     }
 
     main {
-      width: min(100% - 32px, 920px);
+      width: min(100% - 32px, 1040px);
       margin: 0 auto;
       padding: 36px 0;
     }
@@ -67,7 +67,7 @@
     }
 
     .hero p {
-      max-width: 680px;
+      max-width: 720px;
       margin: 0 auto;
       color: var(--muted);
     }
@@ -195,18 +195,20 @@
 
     .card-body {
       display: grid;
-      grid-template-columns: 1fr minmax(280px, 400px);
+      grid-template-columns: minmax(240px, 0.85fr) minmax(320px, 1.25fr);
       gap: 22px;
       padding: 22px;
     }
 
     .info-grid {
       display: grid;
+      align-content: start;
       gap: 14px;
     }
 
     .info-box,
-    .diagram-card {
+    .diagram-card,
+    .other-section {
       padding: 16px;
       border: 1px solid var(--line);
       border-radius: 18px;
@@ -214,7 +216,8 @@
     }
 
     .info-box h2,
-    .diagram-card h3 {
+    .diagram-card h3,
+    .other-section h3 {
       margin: 0 0 10px;
       color: var(--muted);
       font-size: 0.95rem;
@@ -241,27 +244,17 @@
 
     .fingering {
       margin: 0;
-      font-size: clamp(1.45rem, 4vw, 2.2rem);
+      font-size: clamp(1.35rem, 4vw, 2.05rem);
       font-weight: 900;
-      letter-spacing: 0.22em;
+      letter-spacing: 0.18em;
+      word-break: break-word;
     }
 
     .tip,
-    .diagram-note {
+    .diagram-note,
+    .section-note {
       margin: 0;
       color: var(--muted);
-    }
-
-    .visually-hidden {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border: 0;
     }
 
     .diagram-wrap {
@@ -271,9 +264,15 @@
       padding-bottom: 4px;
     }
 
+    .primary-diagrams,
+    .other-grid {
+      display: grid;
+      gap: 14px;
+    }
+
     .strings {
       display: grid;
-      grid-template-columns: 34px repeat(6, 1fr);
+      grid-template-columns: 38px repeat(6, 1fr);
       min-width: 330px;
       margin-bottom: 8px;
       color: var(--muted);
@@ -311,7 +310,7 @@
     }
 
     th.fret-label {
-      width: 34px;
+      width: 38px;
       border-color: transparent rgba(255, 255, 255, 0.12) transparent transparent;
       background: rgba(255, 255, 255, 0.02);
       color: var(--accent);
@@ -376,9 +375,37 @@
       background: rgba(255, 255, 255, 0.025);
     }
 
-    @media (max-width: 760px) {
+    .other-header {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .other-header h3 {
+      margin-bottom: 4px;
+    }
+
+    .count-badge {
+      flex: 0 0 auto;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255, 209, 102, 0.16);
+      color: var(--accent);
+      font-size: 0.86rem;
+      font-weight: 800;
+    }
+
+    .other-grid {
+      max-height: 760px;
+      overflow: auto;
+      padding-right: 4px;
+    }
+
+    @media (max-width: 860px) {
       main {
-        width: min(100% - 20px, 920px);
+        width: min(100% - 20px, 1040px);
         padding: 24px 0;
       }
 
@@ -391,7 +418,8 @@
         position: static;
       }
 
-      .card-header {
+      .card-header,
+      .other-header {
         flex-direction: column;
       }
     }
@@ -402,7 +430,7 @@
     <header class="hero">
       <p class="eyebrow">Acoustic Guitar Helper</p>
       <h1>🎸 木吉他全和弦查詢器</h1>
-      <p>選擇常用或進階和弦，快速查看組成音、開放和弦、封閉和弦、六線按法、指法建議與新手練習提示。</p>
+      <p>選擇常用或進階和弦，快速查看組成音、開放和弦、封閉和弦，以及到第 12 格為止的其他常用按法。</p>
     </header>
 
     <section class="app" aria-label="和弦查詢工具">
@@ -434,8 +462,13 @@
               <ul class="chips" id="notesList"></ul>
             </section>
 
+            <section class="info-box" aria-labelledby="intervalsTitle">
+              <h2 id="intervalsTitle">音程</h2>
+              <ul class="chips" id="intervalList"></ul>
+            </section>
+
             <section class="info-box" aria-labelledby="fingeringTitle">
-              <h2 id="fingeringTitle">六線按法</h2>
+              <h2 id="fingeringTitle">主要六線按法</h2>
               <p class="fingering" id="fingering"></p>
             </section>
 
@@ -447,7 +480,17 @@
 
           <section class="diagram-wrap" aria-labelledby="diagramTitle">
             <h2 class="visually-hidden" id="diagramTitle">和弦圖</h2>
-            <div id="chordDiagrams"></div>
+            <div class="primary-diagrams" id="primaryDiagrams"></div>
+            <section class="other-section" aria-labelledby="otherTitle">
+              <div class="other-header">
+                <div>
+                  <h3 id="otherTitle">其他常用按法</h3>
+                  <p class="section-note">自動列出第 0 到第 12 格內可用、跨度不超過 4 格且包含根音的按法。</p>
+                </div>
+                <span class="count-badge" id="otherCount"></span>
+              </div>
+              <div class="other-grid" id="otherDiagrams"></div>
+            </section>
           </section>
         </div>
       </article>
@@ -455,11 +498,12 @@
   </main>
 
   <script>
-    const NOTE_NAMES = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
-    const ROOTS = [
-      'A', 'Ab', 'A#', 'B', 'Bb', 'B#', 'C', 'Cb', 'C#', 'D', 'Db', 'D#',
-      'E', 'Eb', 'E#', 'F', 'Fb', 'F#', 'G', 'Gb', 'G#'
-    ];
+    const CHROMATIC_SHARP = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+    const LETTER_TO_PC = { C: 0, D: 2, E: 4, F: 5, G: 7, A: 9, B: 11 };
+    const ROOTS = ['C', 'C#', 'Db', 'D', 'D#', 'Eb', 'E', 'F', 'F#', 'Gb', 'G', 'G#', 'Ab', 'A', 'A#', 'Bb', 'B'];
+    const TUNING = [4, 9, 2, 7, 11, 4];
+    const STRING_NAMES = ['E', 'A', 'D', 'G', 'B', 'e'];
+    const MAX_ALTERNATE_FRET = 12;
 
     const NOTE_INDEX = {
       C: 0, 'B#': 0,
@@ -480,50 +524,50 @@
       {
         label: '大調與延伸 Major',
         items: [
-          { suffix: '', name: 'Major', zh: '大三和弦', intervals: [0, 4, 7], tip: '聲音明亮穩定，是民謠與流行歌曲最常見的和弦骨架。' },
-          { suffix: '5', name: 'Power Chord', zh: '五和弦', intervals: [0, 7], tip: '只保留根音與五度，刷電吉他或強力節奏時很常見。' },
-          { suffix: '6', name: 'Major 6', zh: '大六和弦', intervals: [0, 4, 7, 9], tip: '比大三和弦多一點復古與溫暖感，適合慢慢分解彈。' },
-          { suffix: '6/9', name: 'Major 6/9', zh: '大六九和弦', intervals: [0, 4, 7, 9, 14], tip: '色彩柔和，常見於爵士、Neo Soul 與結尾延伸。' },
-          { suffix: 'add9', name: 'Add 9', zh: '加九和弦', intervals: [0, 4, 7, 14], tip: '保留大三和弦的穩定，加入九度會更空靈。' },
-          { suffix: 'maj7', name: 'Major 7', zh: '大七和弦', intervals: [0, 4, 7, 11], tip: '有柔和、夢幻的味道，適合用較輕的刷弦力度。' },
-          { suffix: 'maj9', name: 'Major 9', zh: '大九和弦', intervals: [0, 4, 7, 11, 14], tip: '大七加上九度，聲音更寬，建議先按慢再刷。' },
-          { suffix: 'maj11', name: 'Major 11', zh: '大十一和弦', intervals: [0, 4, 7, 11, 14, 17], tip: '延伸音很多，吉他上可接受省略部分音，重點是保留根音與大七色彩。' },
-          { suffix: 'maj13', name: 'Major 13', zh: '大十三和弦', intervals: [0, 4, 7, 11, 14, 21], tip: '華麗但容易糊，建議分解確認每條弦再刷。' },
-          { suffix: 'aug', name: 'Augmented', zh: '增三和弦', intervals: [0, 4, 8], tip: '增五度會帶來不穩定、往下一個和弦前進的感覺。' }
+          { suffix: '', name: 'Major', zh: '大三和弦', degrees: [1, 3, 5], intervals: [0, 4, 7], intervalLabels: ['1', '3', '5'], tip: '聲音明亮穩定，是民謠與流行歌曲最常見的和弦骨架。' },
+          { suffix: '5', name: 'Power Chord', zh: '五和弦', degrees: [1, 5], intervals: [0, 7], intervalLabels: ['1', '5'], tip: '只保留根音與五度，刷電吉他或強力節奏時很常見。' },
+          { suffix: '6', name: 'Major 6', zh: '大六和弦', degrees: [1, 3, 5, 6], intervals: [0, 4, 7, 9], intervalLabels: ['1', '3', '5', '6'], tip: '比大三和弦多一點復古與溫暖感，適合慢慢分解彈。' },
+          { suffix: '6/9', name: 'Major 6/9', zh: '大六九和弦', degrees: [1, 3, 5, 6, 9], intervals: [0, 4, 7, 9, 14], intervalLabels: ['1', '3', '5', '6', '9'], tip: '色彩柔和，常見於爵士、Neo Soul 與結尾延伸。' },
+          { suffix: 'add9', name: 'Add 9', zh: '加九和弦', degrees: [1, 3, 5, 9], intervals: [0, 4, 7, 14], intervalLabels: ['1', '3', '5', '9'], tip: '保留大三和弦的穩定，加入九度會更空靈。' },
+          { suffix: 'maj7', name: 'Major 7', zh: '大七和弦', degrees: [1, 3, 5, 7], intervals: [0, 4, 7, 11], intervalLabels: ['1', '3', '5', '7'], tip: '有柔和、夢幻的味道，適合用較輕的刷弦力度。' },
+          { suffix: 'maj9', name: 'Major 9', zh: '大九和弦', degrees: [1, 3, 5, 7, 9], intervals: [0, 4, 7, 11, 14], intervalLabels: ['1', '3', '5', '7', '9'], tip: '大七加上九度，聲音更寬，建議先按慢再刷。' },
+          { suffix: 'maj11', name: 'Major 11', zh: '大十一和弦', degrees: [1, 3, 5, 7, 9, 11], intervals: [0, 4, 7, 11, 14, 17], intervalLabels: ['1', '3', '5', '7', '9', '11'], tip: '延伸音很多，吉他上可接受省略部分音，重點是保留根音與大七色彩。' },
+          { suffix: 'maj13', name: 'Major 13', zh: '大十三和弦', degrees: [1, 3, 5, 7, 9, 13], intervals: [0, 4, 7, 11, 14, 21], intervalLabels: ['1', '3', '5', '7', '9', '13'], tip: '華麗但容易糊，建議分解確認每條弦再刷。' },
+          { suffix: 'aug', name: 'Augmented', zh: '增三和弦', degrees: [1, 3, 5], intervals: [0, 4, 8], intervalLabels: ['1', '3', '#5'], tip: '增五度會帶來不穩定、往下一個和弦前進的感覺。' }
         ]
       },
       {
         label: '小調與延伸 Minor',
         items: [
-          { suffix: 'm', name: 'Minor', zh: '小三和弦', intervals: [0, 3, 7], tip: '聲音溫暖帶一點哀傷，適合和大三和弦一起練轉換。' },
-          { suffix: 'm6', name: 'Minor 6', zh: '小六和弦', intervals: [0, 3, 7, 9], tip: '小和弦加六度，常有爵士或老派流行的色彩。' },
-          { suffix: 'm7', name: 'Minor 7', zh: '小七和弦', intervals: [0, 3, 7, 10], tip: '比小三和弦更柔順，刷弦時注意悶掉不該響的弦。' },
-          { suffix: 'm7(b5)', name: 'Minor 7 Flat 5', zh: '半減七和弦', intervals: [0, 3, 6, 10], tip: '半減七常出現在爵士 iiø-V-i，先確認降五度的位置。' },
-          { suffix: 'm9', name: 'Minor 9', zh: '小九和弦', intervals: [0, 3, 7, 10, 14], tip: '小七加九度，聲音更深，適合慢速分解。' },
-          { suffix: 'm11', name: 'Minor 11', zh: '小十一和弦', intervals: [0, 3, 7, 10, 14, 17], tip: '可移動形狀很實用，注意食指橫按要平均施力。' },
-          { suffix: 'm13', name: 'Minor 13', zh: '小十三和弦', intervals: [0, 3, 7, 10, 14, 21], tip: '延伸音較多，先抓住根音、小三度與小七度即可建立色彩。' },
-          { suffix: 'dim', name: 'Diminished', zh: '減三和弦', intervals: [0, 3, 6], tip: '減五度讓聲音緊張，很適合作為經過和弦。' },
-          { suffix: 'dim7', name: 'Diminished 7', zh: '減七和弦', intervals: [0, 3, 6, 9], tip: '對稱結構很好移動，每隔三格會得到同一組音的轉位。' }
+          { suffix: 'm', name: 'Minor', zh: '小三和弦', degrees: [1, 3, 5], intervals: [0, 3, 7], intervalLabels: ['1', 'b3', '5'], tip: '聲音溫暖帶一點哀傷，適合和大三和弦一起練轉換。' },
+          { suffix: 'm6', name: 'Minor 6', zh: '小六和弦', degrees: [1, 3, 5, 6], intervals: [0, 3, 7, 9], intervalLabels: ['1', 'b3', '5', '6'], tip: '小和弦加六度，常有爵士或老派流行的色彩。' },
+          { suffix: 'm7', name: 'Minor 7', zh: '小七和弦', degrees: [1, 3, 5, 7], intervals: [0, 3, 7, 10], intervalLabels: ['1', 'b3', '5', 'b7'], tip: '比小三和弦更柔順，刷弦時注意悶掉不該響的弦。' },
+          { suffix: 'm7(b5)', name: 'Minor 7 Flat 5', zh: '半減七和弦', degrees: [1, 3, 5, 7], intervals: [0, 3, 6, 10], intervalLabels: ['1', 'b3', 'b5', 'b7'], tip: '半減七常出現在爵士 iiø-V-i，先確認降五度的位置。' },
+          { suffix: 'm9', name: 'Minor 9', zh: '小九和弦', degrees: [1, 3, 5, 7, 9], intervals: [0, 3, 7, 10, 14], intervalLabels: ['1', 'b3', '5', 'b7', '9'], tip: '小七加九度，聲音更深，適合慢速分解。' },
+          { suffix: 'm11', name: 'Minor 11', zh: '小十一和弦', degrees: [1, 3, 5, 7, 9, 11], intervals: [0, 3, 7, 10, 14, 17], intervalLabels: ['1', 'b3', '5', 'b7', '9', '11'], tip: '可移動形狀很實用，注意食指橫按要平均施力。' },
+          { suffix: 'm13', name: 'Minor 13', zh: '小十三和弦', degrees: [1, 3, 5, 7, 9, 13], intervals: [0, 3, 7, 10, 14, 21], intervalLabels: ['1', 'b3', '5', 'b7', '9', '13'], tip: '延伸音較多，先抓住根音、小三度與小七度即可建立色彩。' },
+          { suffix: 'dim', name: 'Diminished', zh: '減三和弦', degrees: [1, 3, 5], intervals: [0, 3, 6], intervalLabels: ['1', 'b3', 'b5'], tip: '減五度讓聲音緊張，很適合作為經過和弦。' },
+          { suffix: 'dim7', name: 'Diminished 7', zh: '減七和弦', degrees: [1, 3, 5, 7], intervals: [0, 3, 6, 9], intervalLabels: ['1', 'b3', 'b5', 'bb7'], tip: '對稱結構很好移動，每隔三格會得到同一組音的轉位。' }
         ]
       },
       {
         label: '屬七與變化 Dominant',
         items: [
-          { suffix: '7', name: 'Dominant 7', zh: '屬七和弦', intervals: [0, 4, 7, 10], tip: '很適合接回主和弦，也常用在藍調與民謠結尾。' },
-          { suffix: '7(b5)', name: 'Dominant 7 Flat 5', zh: '屬七降五', intervals: [0, 4, 6, 10], tip: '比普通屬七更緊張，使用時讓聲音清楚不要刷太重。' },
-          { suffix: '7(b9)', name: 'Dominant 7 Flat 9', zh: '屬七降九', intervals: [0, 4, 7, 10, 13], tip: '降九音色強烈，適合慢慢彈出每個音的張力。' },
-          { suffix: '7(#9)', name: 'Dominant 7 Sharp 9', zh: '屬七升九', intervals: [0, 4, 7, 10, 15], tip: '藍調與放克常見，升九的張力要讓它清楚響出來。' },
-          { suffix: '7sus4', name: 'Dominant 7 Sus 4', zh: '屬七掛四', intervals: [0, 5, 7, 10], tip: '先掛住四度再回到三度，能做出很自然的解決感。' },
-          { suffix: '9', name: 'Dominant 9', zh: '屬九和弦', intervals: [0, 4, 7, 10, 14], tip: '藍調與爵士很常用，若低音太濁可以少刷第 6 弦。' },
-          { suffix: '11', name: 'Dominant 11', zh: '屬十一和弦', intervals: [0, 4, 7, 10, 14, 17], tip: '十一度會帶出懸浮感，適合分解或輕刷。' },
-          { suffix: '13', name: 'Dominant 13', zh: '屬十三和弦', intervals: [0, 4, 7, 10, 14, 21], tip: '爵士感最明顯，先確認小七度與十三度都有聽到。' }
+          { suffix: '7', name: 'Dominant 7', zh: '屬七和弦', degrees: [1, 3, 5, 7], intervals: [0, 4, 7, 10], intervalLabels: ['1', '3', '5', 'b7'], tip: '很適合接回主和弦，也常用在藍調與民謠結尾。' },
+          { suffix: '7(b5)', name: 'Dominant 7 Flat 5', zh: '屬七降五', degrees: [1, 3, 5, 7], intervals: [0, 4, 6, 10], intervalLabels: ['1', '3', 'b5', 'b7'], tip: '比普通屬七更緊張，使用時讓聲音清楚不要刷太重。' },
+          { suffix: '7(b9)', name: 'Dominant 7 Flat 9', zh: '屬七降九', degrees: [1, 3, 5, 7, 9], intervals: [0, 4, 7, 10, 13], intervalLabels: ['1', '3', '5', 'b7', 'b9'], tip: '降九音色強烈，適合慢慢彈出每個音的張力。' },
+          { suffix: '7(#9)', name: 'Dominant 7 Sharp 9', zh: '屬七升九', degrees: [1, 3, 5, 7, 9], intervals: [0, 4, 7, 10, 15], intervalLabels: ['1', '3', '5', 'b7', '#9'], tip: '藍調與放克常見，升九的張力要讓它清楚響出來。' },
+          { suffix: '7sus4', name: 'Dominant 7 Sus 4', zh: '屬七掛四', degrees: [1, 4, 5, 7], intervals: [0, 5, 7, 10], intervalLabels: ['1', '4', '5', 'b7'], tip: '先掛住四度再回到三度，能做出很自然的解決感。' },
+          { suffix: '9', name: 'Dominant 9', zh: '屬九和弦', degrees: [1, 3, 5, 7, 9], intervals: [0, 4, 7, 10, 14], intervalLabels: ['1', '3', '5', 'b7', '9'], tip: '藍調與爵士很常用，若低音太濁可以少刷第 6 弦。' },
+          { suffix: '11', name: 'Dominant 11', zh: '屬十一和弦', degrees: [1, 3, 5, 7, 9, 11], intervals: [0, 4, 7, 10, 14, 17], intervalLabels: ['1', '3', '5', 'b7', '9', '11'], tip: '十一度會帶出懸浮感，適合分解或輕刷。' },
+          { suffix: '13', name: 'Dominant 13', zh: '屬十三和弦', degrees: [1, 3, 5, 7, 9, 13], intervals: [0, 4, 7, 10, 14, 21], intervalLabels: ['1', '3', '5', 'b7', '9', '13'], tip: '爵士感最明顯，先確認小七度與十三度都有聽到。' }
         ]
       },
       {
         label: '掛留 Sus',
         items: [
-          { suffix: 'sus2', name: 'Suspended 2', zh: '掛二和弦', intervals: [0, 2, 7], tip: '用二度取代三度，聲音開闊、不明顯大調或小調。' },
-          { suffix: 'sus4', name: 'Suspended 4', zh: '掛四和弦', intervals: [0, 5, 7], tip: '用四度取代三度，常見練法是 sus4 回到大三和弦。' }
+          { suffix: 'sus2', name: 'Suspended 2', zh: '掛二和弦', degrees: [1, 2, 5], intervals: [0, 2, 7], intervalLabels: ['1', '2', '5'], tip: '用二度取代三度，聲音開闊、不明顯大調或小調。' },
+          { suffix: 'sus4', name: 'Suspended 4', zh: '掛四和弦', degrees: [1, 4, 5], intervals: [0, 5, 7], intervalLabels: ['1', '4', '5'], tip: '用四度取代三度，常見練法是 sus4 回到大三和弦。' }
         ]
       }
     ];
@@ -618,9 +662,12 @@
     const chordQuality = document.getElementById('chordQuality');
     const difficulty = document.getElementById('difficulty');
     const notesList = document.getElementById('notesList');
+    const intervalList = document.getElementById('intervalList');
     const fingering = document.getElementById('fingering');
     const tip = document.getElementById('tip');
-    const chordDiagrams = document.getElementById('chordDiagrams');
+    const primaryDiagrams = document.getElementById('primaryDiagrams');
+    const otherDiagrams = document.getElementById('otherDiagrams');
+    const otherCount = document.getElementById('otherCount');
 
     function normalizeIndex(note) {
       return NOTE_INDEX[note];
@@ -628,15 +675,6 @@
 
     function formatChordName(root, suffix) {
       return `${root}${suffix}`;
-    }
-
-    function buildNotes(root, intervals) {
-      const rootIndex = normalizeIndex(root);
-      return intervals.map(interval => NOTE_NAMES[(rootIndex + interval) % 12]);
-    }
-
-    function getFingering(frets) {
-      return frets.map(fret => (fret === 'X' ? 'X' : String(fret))).join('');
     }
 
     function transposeFrets(shape, root) {
@@ -651,6 +689,54 @@
 
         return fret + offset;
       });
+    }
+
+    function applyAccidental(letter, diff) {
+      if (diff === 0) {
+        return letter;
+      }
+
+      if (diff > 0) {
+        return `${letter}${'#'.repeat(diff)}`;
+      }
+
+      return `${letter}${'b'.repeat(Math.abs(diff))}`;
+    }
+
+    function spellNote(root, degree, interval) {
+      const letters = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
+      const rootLetter = root[0];
+      const rootLetterIndex = letters.indexOf(rootLetter);
+      const targetLetter = letters[(rootLetterIndex + ((degree - 1) % 7)) % 7];
+      const targetPc = (normalizeIndex(root) + interval) % 12;
+      const naturalPc = LETTER_TO_PC[targetLetter];
+      let diff = (targetPc - naturalPc + 12) % 12;
+
+      if (diff > 6) {
+        diff -= 12;
+      }
+
+      return applyAccidental(targetLetter, diff);
+    }
+
+    function spellNotes(root, quality) {
+      return quality.intervals.map((interval, index) => spellNote(root, quality.degrees[index], interval));
+    }
+
+    function getFingering(frets) {
+      return frets.map(fret => (fret === 'X' ? 'X' : String(fret))).join('');
+    }
+
+    function getPressedFrets(frets) {
+      return frets.filter(Number.isInteger).filter(fret => fret > 0);
+    }
+
+    function normalizeVoicingKey(frets) {
+      return frets.join('-');
+    }
+
+    function hasRoot(frets, rootPc) {
+      return frets.some((fret, index) => Number.isInteger(fret) && (TUNING[index] + fret) % 12 === rootPc);
     }
 
     function getClosedVoicing(root, quality) {
@@ -701,24 +787,154 @@
 
     function getTip(openVoicing, quality) {
       const baseTip = openVoicing?.tip || quality.tip;
-      return `${baseTip} 封閉版本請先把食指靠近琴衍，從低音到高音逐條檢查是否有悶音。`;
+      return `${baseTip} 其他按法可先從低把位開始，確認根音與必要音都有響，再慢慢移到高把位。`;
+    }
+
+    function buildStringChoices(stringIndex, noteSet, start, end) {
+      const choices = ['X'];
+
+      for (let fret = 0; fret <= MAX_ALTERNATE_FRET; fret += 1) {
+        const pc = (TUNING[stringIndex] + fret) % 12;
+        const inWindow = fret === 0 || (fret >= start && fret <= end);
+
+        if (noteSet.has(pc) && inWindow) {
+          choices.push(fret);
+        }
+      }
+
+      return choices;
+    }
+
+    function isPlayableVoicing(frets, rootPc, quality) {
+      const sounding = frets.filter(value => value !== 'X');
+      const pressed = getPressedFrets(frets);
+      const uniquePcs = new Set(frets.filter(Number.isInteger).map((fret, index) => (TUNING[index] + fret) % 12));
+      const minRequiredNotes = Math.min(quality.intervals.length, 3);
+
+      if (sounding.length < 3 || sounding.length > 6) {
+        return false;
+      }
+
+      if (!hasRoot(frets, rootPc) || uniquePcs.size < minRequiredNotes) {
+        return false;
+      }
+
+      if (pressed.length) {
+        const span = Math.max(...pressed) - Math.min(...pressed);
+
+        if (span > 4) {
+          return false;
+        }
+      }
+
+      return true;
+    }
+
+    function guessFingers(frets) {
+      const pressed = getPressedFrets(frets);
+
+      if (!pressed.length) {
+        return frets.map(() => '');
+      }
+
+      const minFret = Math.min(...pressed);
+      const fretToFinger = new Map();
+      let nextFinger = minFret > 1 ? 1 : 1;
+
+      [...new Set(pressed)].sort((a, b) => a - b).forEach(fret => {
+        if (fret === minFret && pressed.filter(value => value === fret).length > 1) {
+          fretToFinger.set(fret, 1);
+        } else {
+          fretToFinger.set(fret, Math.min(nextFinger, 4));
+          nextFinger += 1;
+        }
+      });
+
+      return frets.map(fret => (Number.isInteger(fret) && fret > 0 ? fretToFinger.get(fret) : ''));
+    }
+
+    function hasBarre(frets, fingers) {
+      return fingers.some((finger, index) => finger === 1 && frets[index] > 0 && fingers.indexOf(finger) !== index);
+    }
+
+    function scoreVoicing(frets, rootPc) {
+      const pressed = getPressedFrets(frets);
+      const sounding = frets.filter(value => value !== 'X').length;
+      const muted = frets.filter(value => value === 'X').length;
+      const minFret = pressed.length ? Math.min(...pressed) : 0;
+      const span = pressed.length ? Math.max(...pressed) - minFret : 0;
+      const bassIndex = frets.findIndex(value => value !== 'X');
+      const bassIsRoot = bassIndex >= 0 && (TUNING[bassIndex] + frets[bassIndex]) % 12 === rootPc;
+
+      return (minFret * 12) + (span * 7) + (muted * 4) - (sounding * 2) - (bassIsRoot ? 5 : 0);
+    }
+
+    function generateAlternateVoicings(root, quality, excludedKeys) {
+      const rootPc = normalizeIndex(root);
+      const noteSet = new Set(quality.intervals.map(interval => (rootPc + interval) % 12));
+      const voicings = [];
+      const seen = new Set(excludedKeys);
+
+      for (let start = 0; start <= MAX_ALTERNATE_FRET - 3; start += 1) {
+        const end = start + 4;
+        const choices = TUNING.map((_, stringIndex) => buildStringChoices(stringIndex, noteSet, start, end));
+
+        choices[0].forEach(s6 => {
+          choices[1].forEach(s5 => {
+            choices[2].forEach(s4 => {
+              choices[3].forEach(s3 => {
+                choices[4].forEach(s2 => {
+                  choices[5].forEach(s1 => {
+                    const frets = [s6, s5, s4, s3, s2, s1];
+                    const key = normalizeVoicingKey(frets);
+
+                    if (seen.has(key) || !isPlayableVoicing(frets, rootPc, quality)) {
+                      return;
+                    }
+
+                    const fingers = guessFingers(frets);
+                    seen.add(key);
+                    voicings.push({
+                      label: `其他按法 ${voicings.length + 1}`,
+                      frets,
+                      fingers,
+                      barre: hasBarre(frets, fingers),
+                      note: `六線按法：${getFingering(frets)}`,
+                      score: scoreVoicing(frets, rootPc)
+                    });
+                  });
+                });
+              });
+            });
+          });
+        });
+      }
+
+      return voicings.sort((a, b) => a.score - b.score).slice(0, 24).map((voicing, index) => ({
+        ...voicing,
+        label: `其他按法 ${index + 1}`
+      }));
     }
 
     function buildChord(root, quality) {
       const name = formatChordName(root, quality.suffix);
       const openVoicing = getOpenVoicing(name);
       const closedVoicing = getClosedVoicing(root, quality);
+      const excludedKeys = [openVoicing, closedVoicing].filter(Boolean).map(voicing => normalizeVoicingKey(voicing.frets));
+      const alternateVoicings = generateAlternateVoicings(root, quality, excludedKeys);
 
       return {
         name,
         label: `${name} 和弦`,
         quality: `${name} ${quality.name}｜${quality.zh}`,
-        notes: buildNotes(root, quality.intervals),
+        notes: spellNotes(root, quality),
+        intervalLabels: quality.intervalLabels,
         fingering: openVoicing ? getFingering(openVoicing.frets) : getFingering(closedVoicing.frets),
         difficulty: getDifficulty(openVoicing, closedVoicing, quality),
         tip: getTip(openVoicing, quality),
         openVoicing,
-        closedVoicing
+        closedVoicing,
+        alternateVoicings
       };
     }
 
@@ -745,14 +961,14 @@
       select.value = 'C';
     }
 
-    function renderNotes(notes) {
-      notesList.replaceChildren();
+    function renderChips(container, values) {
+      container.replaceChildren();
 
-      notes.forEach(note => {
+      values.forEach(value => {
         const item = document.createElement('li');
         item.className = 'chip';
-        item.textContent = note;
-        notesList.appendChild(item);
+        item.textContent = value;
+        container.appendChild(item);
       });
     }
 
@@ -783,8 +999,13 @@
     }
 
     function getVisibleFrets(frets) {
-      const pressed = frets.filter(Number.isInteger);
-      const minFret = Math.min(...pressed.filter(fret => fret > 0));
+      const pressed = getPressedFrets(frets);
+
+      if (!pressed.length) {
+        return [1, 2, 3, 4];
+      }
+
+      const minFret = Math.min(...pressed);
       const maxFret = Math.max(...pressed);
       const start = minFret > 4 ? minFret : 1;
       const end = Math.max(start + 3, maxFret);
@@ -796,7 +1017,7 @@
       if (!voicing) {
         const message = document.createElement('p');
         message.className = 'empty-voicing';
-        message.textContent = '這個和弦沒有常用開放版本，請先練右邊的封閉和弦形狀。';
+        message.textContent = '這個和弦沒有常用開放版本，請先練封閉和弦與其他按法。';
         return message;
       }
 
@@ -840,25 +1061,30 @@
       return table;
     }
 
-    function createDiagramCard(voicing) {
-      const card = document.createElement('section');
+    function createStringLabels() {
       const strings = document.createElement('div');
-      const heading = document.createElement('h3');
-      const note = document.createElement('p');
-
-      card.className = 'diagram-card';
-      heading.textContent = voicing?.label || '開放和弦';
-
       strings.className = 'strings';
       strings.setAttribute('aria-hidden', 'true');
-      ['', 'E', 'A', 'D', 'G', 'B', 'e'].forEach(stringName => {
+
+      ['', ...STRING_NAMES].forEach(stringName => {
         const string = document.createElement('span');
         string.textContent = stringName;
         strings.appendChild(string);
       });
 
+      return strings;
+    }
+
+    function createDiagramCard(voicing, fallbackTitle = '開放和弦') {
+      const card = document.createElement('section');
+      const heading = document.createElement('h3');
+      const note = document.createElement('p');
+
+      card.className = 'diagram-card';
+      heading.textContent = voicing?.label || fallbackTitle;
+
       card.appendChild(heading);
-      card.appendChild(strings);
+      card.appendChild(createStringLabels());
       card.appendChild(renderFretboard(voicing));
 
       if (voicing?.note) {
@@ -889,12 +1115,15 @@
       difficulty.textContent = chord.difficulty;
       fingering.textContent = chord.fingering;
       tip.textContent = chord.tip;
+      otherCount.textContent = `${chord.alternateVoicings.length} 種`;
 
-      renderNotes(chord.notes);
-      chordDiagrams.replaceChildren(
-        createDiagramCard(chord.openVoicing),
-        createDiagramCard(chord.closedVoicing)
+      renderChips(notesList, chord.notes);
+      renderChips(intervalList, chord.intervalLabels);
+      primaryDiagrams.replaceChildren(
+        createDiagramCard(chord.openVoicing, '開放和弦'),
+        createDiagramCard(chord.closedVoicing, '封閉和弦')
       );
+      otherDiagrams.replaceChildren(...chord.alternateVoicings.map(voicing => createDiagramCard(voicing, '其他按法')));
     }
 
     buildOptions();
