@@ -4,4 +4,4 @@
 (https://add1699831-droid.github.io/專案名稱/XXX)
 
 🎸 木吉他全和弦查詢器
-https://add1699831-droid.github.io/Guitar-app/AccousticGuitar.html
+https://add1699831-droid.github.io/Guitar-app/
