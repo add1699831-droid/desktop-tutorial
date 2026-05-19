@@ -443,7 +443,7 @@
     <header class="hero">
       <p class="eyebrow">Acoustic Guitar Helper</p>
       <h1>🎸 木吉他常用和弦查詢器</h1>
-      <p>這版把「開放和弦」改成手動整理的常用正確按法，不再用程式亂生怪形狀；封閉和弦與其他按法也只保留民謠、CAGED 與藍調爵士常見的形狀。</p>
+      <p>參考 Musicca 和弦字典的和弦分類重新整理：開放和弦改成手動整理的常用正確按法，Sus 掛留和弦也補上可用開放版本；同時新增唱名與和弦情感形容。</p>
     </header>
 
     <section class="app" aria-label="和弦查詢工具">
@@ -473,6 +473,16 @@
             <section class="info-box" aria-labelledby="notesTitle">
               <h2 id="notesTitle">組成音</h2>
               <ul class="chips" id="notesList"></ul>
+            </section>
+
+            <section class="info-box" aria-labelledby="solfegeTitle">
+              <h2 id="solfegeTitle">唱名</h2>
+              <ul class="chips" id="solfegeList"></ul>
+            </section>
+
+            <section class="info-box" aria-labelledby="emotionTitle">
+              <h2 id="emotionTitle">情感形容</h2>
+              <p class="tip" id="emotionText"></p>
             </section>
 
             <section class="info-box" aria-labelledby="intervalsTitle">
@@ -591,6 +601,8 @@
       C7: { frets: ['X', 3, 2, 3, 1, 0], fingers: ['', 3, 2, 4, 1, ''], tip: 'C7 比 C 多了第 3 弦第 3 格，常用來接 F。' },
       Cadd9: { frets: ['X', 3, 2, 0, 3, 0], fingers: ['', 3, 2, '', 4, ''], tip: '保留 C 的低音框架，讓第 2 弦第 3 格帶出明亮九度。' },
       Cmaj7: { frets: ['X', 3, 2, 0, 0, 0], fingers: ['', 3, 2, '', '', ''], tip: '比 C 更夢幻，注意第 2 弦空弦要清楚。' },
+      Csus2: { frets: ['X', 3, 0, 0, 1, 3], fingers: ['', 3, '', '', 1, 4], tip: 'Csus2 保留 C 根音，讓第 4 弦空弦 D 帶出掛二的開闊感。' },
+      Csus4: { frets: ['X', 3, 3, 0, 1, 1], fingers: ['', 3, 4, '', 1, 1], barre: true, tip: 'Csus4 可用食指小橫按第 2、1 弦，聽掛四音解決回 C。' },
       D: { frets: ['X', 'X', 0, 2, 3, 2], fingers: ['', '', '', 1, 3, 2], tip: '從第 4 弦開始刷，前兩條低音弦不要彈。' },
       D5: { frets: ['X', 'X', 0, 2, 3, 'X'], fingers: ['', '', '', 1, 3, ''], tip: '只刷中間三條弦，避免第 1 弦加入三度。' },
       D6: { frets: ['X', 'X', 0, 2, 0, 2], fingers: ['', '', '', 1, '', 2], tip: '第 2 弦空弦提供六度，聲音很適合民謠分解。' },
@@ -608,6 +620,7 @@
       E7: { frets: [0, 2, 0, 1, 0, 0], fingers: ['', 2, '', 1, '', ''], tip: '比 E 大和弦少一根手指，轉換時保持食指位置。' },
       E7sus4: { frets: [0, 2, 0, 2, 0, 0], fingers: ['', 1, '', 2, '', ''], tip: 'E7sus4 接 E7 很適合練習掛留解決。' },
       Eadd9: { frets: [0, 2, 2, 1, 0, 2], fingers: ['', 2, 3, 1, '', 4], tip: '第 1 弦第 2 格是九度，確認小指不要壓到旁邊弦。' },
+      Esus2: { frets: [0, 2, 4, 4, 0, 0], fingers: ['', 1, 3, 4, '', ''], tip: 'Esus2 是常見開放掛二色彩，先確認第 3、4 弦第 4 格都有按實。' },
       Em: { frets: [0, 2, 2, 0, 0, 0], fingers: ['', 2, 3, '', '', ''], tip: '只需要兩根手指，適合用來練習穩定刷弦節奏。' },
       Em7: { frets: [0, 2, 2, 0, 3, 0], fingers: ['', 1, 2, '', 3, ''], tip: '高音加入 D，刷起來比 Em 更開闊。' },
       Esus4: { frets: [0, 2, 2, 2, 0, 0], fingers: ['', 1, 2, 3, '', ''], tip: '第 3 弦第 2 格可以接回第 1 格，練習 Esus4 到 E。' },
@@ -618,6 +631,7 @@
       G7: { frets: [3, 2, 0, 0, 0, 1], fingers: [3, 2, '', '', '', 1], tip: '最高音第 1 格讓 G7 很有回到 C 的感覺。' },
       Gadd9: { frets: [3, 0, 0, 0, 0, 3], fingers: [2, '', '', '', '', 3], tip: '第 5 弦空弦是九度，刷弦會比 G 更空曠。' },
       Gmaj7: { frets: [3, 2, 0, 0, 0, 2], fingers: [3, 1, '', '', '', 2], tip: '高音 F# 是大七度，按穩會有很柔的結尾感。' },
+      Gsus2: { frets: [3, 0, 0, 0, 3, 3], fingers: [2, '', '', '', 3, 4], tip: 'Gsus2 有很開闊的民謠感，注意第 5 弦空弦不要被第 6 弦手指碰到。' },
       Gsus4: { frets: [3, 3, 0, 0, 1, 3], fingers: [2, 3, '', '', 1, 4], tip: 'Gsus4 可接 G，聽第 2 弦從 1 格回到空弦。' }
     };
 
@@ -711,6 +725,8 @@
     const chordQuality = document.getElementById('chordQuality');
     const difficulty = document.getElementById('difficulty');
     const notesList = document.getElementById('notesList');
+    const solfegeList = document.getElementById('solfegeList');
+    const emotionText = document.getElementById('emotionText');
     const intervalList = document.getElementById('intervalList');
     const fingering = document.getElementById('fingering');
     const tip = document.getElementById('tip');
@@ -761,6 +777,48 @@
 
     function spellNotes(root, quality) {
       return quality.intervals.map((interval, index) => spellNote(root, quality.degrees[index], interval));
+    }
+
+
+    function noteToSolfege(note) {
+      const match = note.match(/^([A-G])([#b]*)$/);
+      const baseMap = { C: 'Do', D: 'Re', E: 'Mi', F: 'Fa', G: 'Sol', A: 'La', B: 'Si' };
+
+      if (!match) {
+        return note;
+      }
+
+      const [, letter, accidentals] = match;
+      const accidentalText = accidentals
+        .replaceAll('#', '升')
+        .replaceAll('b', '降');
+
+      return `${accidentalText}${baseMap[letter]}`;
+    }
+
+    function describeEmotion(quality) {
+      const descriptions = {
+        '': '明亮、穩定、有回家的感覺，適合當歌曲主和弦或段落結尾。',
+        '5': '直接、有力、粗獷，情緒比較中性，常用來做強烈節奏。',
+        '6': '溫暖、復古、帶一點輕鬆搖擺感，比大三和弦更柔。',
+        add9: '清澈、空靈、帶空間感，常讓民謠刷弦聽起來更開闊。',
+        maj7: '夢幻、柔和、浪漫，適合安靜段落或抒情結尾。',
+        maj9: '寬廣、精緻、帶爵士感，比 maj7 更有漂浮感。',
+        m: '溫柔、內斂、帶一點哀傷，是流行情歌常見色彩。',
+        m6: '懷舊、優雅、略帶神祕感，適合爵士或老派流行。',
+        m7: '柔順、慵懶、舒服，比小三和弦更放鬆。',
+        m9: '深沉、朦朧、很有夜晚感，適合慢速分解或 Neo Soul 色彩。',
+        dim: '緊張、不安、像過門一樣需要往下一個和弦移動。',
+        dim7: '戲劇化、懸疑、張力很強，適合做經過和弦。',
+        '7': '有推進感、帶藍調味，常用來製造「想回家」的張力。',
+        '9': '放克、藍調、爵士感明顯，聽起來更厚也更有律動。',
+        '7sus4': '懸浮、期待、還沒解決，適合接回屬七或大三和弦。',
+        '13': '華麗、成熟、爵士味濃，適合藍調結尾或進階伴奏。',
+        sus2: '開闊、清新、沒有明顯大調或小調，常有透明感。',
+        sus4: '懸疑、期待、帶向前推的感覺，很適合解決回大三和弦。'
+      };
+
+      return descriptions[quality.suffix] || '色彩特殊，建議先慢慢分解聽出每個音的情緒。';
     }
 
     function hasOpenString(voicing) {
@@ -903,6 +961,8 @@
         label: `${name} 和弦`,
         quality: `${name} ${quality.name}｜${quality.zh}`,
         notes: spellNotes(root, quality),
+        solfege: spellNotes(root, quality).map(noteToSolfege),
+        emotion: describeEmotion(quality),
         intervalLabels: quality.intervalLabels,
         fingering: openVoicing ? getFingering(openVoicing.frets) : closedVoicing ? getFingering(closedVoicing.frets) : '無常用按法',
         difficulty: getDifficulty(openVoicing, closedVoicing, quality),
@@ -1094,6 +1154,8 @@
       otherCount.textContent = `${chord.alternateVoicings.length} 種`;
 
       renderChips(notesList, chord.notes);
+      renderChips(solfegeList, chord.solfege);
+      emotionText.textContent = chord.emotion;
       renderChips(intervalList, chord.intervalLabels);
 
       primaryDiagrams.replaceChildren(
